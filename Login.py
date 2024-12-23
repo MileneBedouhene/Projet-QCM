@@ -1,4 +1,5 @@
 import pandas as pd
+import csv
 import hashlib
 
 
@@ -9,7 +10,7 @@ def Ouverture_Fichier(Chemin_Fichier):
 
 # Fonction de sauvegarde de fichier csv
 def Sauvegarde_Fichier(df, Chemin_Fichier):
-    df.to_csv(Chemin_Fichier, index=False)  # index=False pour ne pas inclure l'index comme colonne dans le fichier CSV
+   df.to_csv(Chemin_Fichier, index=False, quoting=csv.QUOTE_NONNUMERIC) # index=False pour ne pas inclure l'index comme colonne dans le fichier CSV
     
 # Fonction de hachage
 def Hachage_Password(PassWord):
@@ -49,7 +50,7 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
         nouvel_utilisateur = {
             'username': UserName,
             'password': password_hache,
-            'score_total': "0,0",  
+            'score_total': "0",  
             'historique_qcm_histoire': "0,0",
             'historique_qcm_geo': "0,0",
             'historique_qcm_python': "0,0",
@@ -59,7 +60,24 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
         
         # Convertir le dictionnaire en DataFrame
         nouvel_utilisateur_df = pd.DataFrame([nouvel_utilisateur])
-    
+
+        colonnes_attendues = [
+            'username', 'password', 'score_total',
+            'historique_qcm_histoire', 'historique_qcm_geo', 
+            'historique_qcm_python', 'historique_qcm_algorithmique', 'historique_qcm_reseau'
+        ]
+
+        colonnes_attendues = [
+            'username', 'password', 'score_total',
+            'historique_qcm_histoire', 'historique_qcm_geo', 
+            'historique_qcm_python', 'historique_qcm_algorithmique', 'historique_qcm_reseau'
+        ]
+
+        for colonne in colonnes_attendues:
+            if colonne not in df.columns:
+                df[colonne] = ""
+        
+
         # Ajouter le nouvel utilisateur au DataFrame existant
         df = pd.concat([df, nouvel_utilisateur_df], ignore_index=True)
     
@@ -67,6 +85,10 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
         Sauvegarde_Fichier(df, Chemin_Fichier)
     
         return True
+    
+
+
+    
 
 
 
