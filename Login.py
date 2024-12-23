@@ -2,14 +2,13 @@ import pandas as pd
 import hashlib
 
 
-
 # Fonction d'ouverture d'un fichier csv
 def Ouverture_Fichier(Chemin_Fichier):
     df = pd.read_csv(Chemin_Fichier)
     return(df)
 
 # Fonction de sauvegarde de fichier csv
-def sauvegarder_fichier(df, Chemin_Fichier):
+def Sauvegarde_Fichier(df, Chemin_Fichier):
     df.to_csv(Chemin_Fichier, index=False)  # index=False pour ne pas inclure l'index comme colonne dans le fichier CSV
     
 # Fonction de hachage
@@ -65,50 +64,11 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
         df = pd.concat([df, nouvel_utilisateur_df], ignore_index=True)
     
         # Sauvegarder les changements dans le fichier CSV
-        sauvegarder_fichier(df, Chemin_Fichier)
+        Sauvegarde_Fichier(df, Chemin_Fichier)
     
         return True
 
 
-### Test :
-print("==== Menu Principal ====")
-print("1. Connexion")
-print("2. Inscription")
-print("3. Quitter")
-print("=========================")
-
-
-Chemin_Fichier = "./DataBase.csv"
-df = Ouverture_Fichier(Chemin_Fichier)
-Existe = False
-
-Choix = int(input("Faites votre choix : "))
-if Choix == 1 :
-    UserName = input("Veuillez saisir votre nom d'utilisateur : ")
-    Password = input("Veuillez saisir votre mot de passe : ")
-    Existe = Connexion(df, UserName, Password)
-    if Existe :
-        print("Bienvenue sur votre espace")
-    else :  # Afficher ca pour les deux cas (utilisateur non exisatant ou mot de passe incorrecte) pour des raisons de securite
-        print("Utilisateur n'existe pas")
-
-elif Choix == 2:
-    while Existe == False:
-        UserName = input("Veuillez saisir votre nom d'utilisateur : ")
-        Password = input("Veuillez saisir votre mot de passe : ")
-        Existe = CreationUtilisateur(df, UserName, Password,Chemin_Fichier)
-        if Existe :
-            print("Utilisateur creer avec succes")
-            print("Bienvenue sur votre espace")
-        else:
-            print("Veuillez saisir un autre nom d'utilisateur")
-
-elif Choix == 3:
-    exit()
-
-else :
-    print("Vous n'avez pas choisit les bonnes options")
-    exit()
 
 
 
