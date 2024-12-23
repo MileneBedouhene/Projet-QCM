@@ -49,12 +49,12 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
         nouvel_utilisateur = {
             'username': UserName,
             'password': password_hache,
-            'score_total': 0,  
-            'historique_qcm_histoire': 0,
-            'historique_qcm_geo': 0,
-            'historique_qcm_python': 0,
-            'historique_qcm_algorithmique': 0,
-            'historique_qcm_reseau': 0
+            'score_total': "0,0",  
+            'historique_qcm_histoire': "0,0",
+            'historique_qcm_geo': "0,0",
+            'historique_qcm_python': "0,0",
+            'historique_qcm_algorithmique': "0,0",
+            'historique_qcm_reseau': "0,0"
         }
         
         # Convertir le dictionnaire en DataFrame
