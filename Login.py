@@ -50,7 +50,7 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
         nouvel_utilisateur = {
             'username': UserName,
             'password': password_hache,
-            'score_total': "0",  
+            'score_total': 0,  
             'historique_qcm_histoire': "0,0",
             'historique_qcm_geo': "0,0",
             'historique_qcm_python': "0,0",
