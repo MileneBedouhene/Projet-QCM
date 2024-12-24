@@ -1,0 +1,6 @@
+question,option1,option2,option3,option4,correct_option
+Quelle est la sortie de la commande suivante : print(2 ** 3) ?,8,6,9,7,1
+Quelle est la différence entre une liste et un tuple en Python ?,Les tuples sont immuables,Les listes sont immuables,Les tuples sont dynamiques,Les listes sont plus rapides,1
+Comment définir une fonction en Python ?,def ma_fonction(),function ma_fonction(),func ma_fonction(),def int function(),1
+Quelle est la méthode pour ajouter un élément à une liste en Python ?,append(),add(),insert(),push(),1
+Quel est le résultat de l'expression suivante : 10 // 3 ?,3,3.3,4,3.0,1
