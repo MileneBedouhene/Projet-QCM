@@ -43,8 +43,7 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
             'username': UserName,
             'password': password_hache,
             'score_total': 0,  
-            'historique_qcm_histoire': "0,0",
-            'historique_qcm_geo': "0,0",
+            'historique_qcm_securite': "0,0",
             'historique_qcm_python': "0,0",
             'historique_qcm_algorithmique': "0,0",
             'historique_qcm_reseau': "0,0"
@@ -55,14 +54,14 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
 
         colonnes_attendues = [
             'username', 'password', 'score_total',
-            'historique_qcm_histoire', 'historique_qcm_geo', 
-            'historique_qcm_python', 'historique_qcm_algorithmique', 'historique_qcm_reseau'
+            'historique_qcm_securite',  'historique_qcm_python', 
+            'historique_qcm_algorithmique', 'historique_qcm_reseau'
         ]
 
         colonnes_attendues = [
             'username', 'password', 'score_total',
-            'historique_qcm_histoire', 'historique_qcm_geo', 
-            'historique_qcm_python', 'historique_qcm_algorithmique', 'historique_qcm_reseau'
+            'historique_qcm_securite', 'historique_qcm_python', 
+            'historique_qcm_algorithmique', 'historique_qcm_reseau'
         ]
 
         for colonne in colonnes_attendues:
