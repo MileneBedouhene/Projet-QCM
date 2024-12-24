@@ -1,0 +1,6 @@
+question,option1,option2,option3,option4,correct_option
+"Quel protocole est utilisé pour envoyer des emails ?",HTTP,SMTP,FTP,TCP,2
+"Quel est le port standard pour HTTP ?",80,22,443,21,1
+"Quelle adresse IP est réservée pour le localhost ?",127.0.0.1,192.168.1.1,10.0.0.1,8.8.8.8,1
+"Quel est le rôle d'un routeur ?",Relier des réseaux différents,Filtrer le trafic réseau,Fournir des adresses IP,Gérer les DNS,1
+"Quel est le protocole utilisé pour sécuriser les communications sur le web ?",FTP,HTTP,TCP,HTTPS,4
