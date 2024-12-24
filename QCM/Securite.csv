@@ -1,0 +1,6 @@
+question,option1,option2,option3,option4,correct_option
+"Quel est le rôle du pare-feu ?",Bloquer les virus,Analyser les paquets réseau,Filtrer le trafic réseau,Empêcher les pirates,3
+"Quelle méthode est utilisée pour chiffrer des données ?",Encodage,Cryptographie,Compression,Hashage,2
+"Quel est un exemple d'attaque par ingénierie sociale ?",Phishing,DDoS,Injection SQL,Brute Force,1
+"Que signifie HTTPS ?",HyperText Transfer Protocol Secure,HyperText Transmission Protocol Secure,High Transfer Protocol Secure,None of the above,1
+"Quel outil est utilisé pour détecter des vulnérabilités ?",Nmap,Wireshark,Kali Linux,Metasploit,4
