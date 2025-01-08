@@ -1,10 +1,11 @@
-from Authentification import *
 import getpass
 from FonctionLogin import *
+from FonctionDashboard import *
 
 
 
 def main():
+
 ###############################################################################################################
 ############################################### AUTHENTIFICATION ##############################################
 ###############################################################################################################
@@ -16,15 +17,15 @@ def main():
     print("1. Connexion")
     print("2. Inscription")
     print("3. Quitter")
-    print("\n--------------------------------")
+    print("\n--------------------------------\n")
 
     Existe = False
     try:
-        Choix = int(input("Faites votre choix : "))
+        ChoixLogin = int(input("Faites votre choix : "))
         print("--------------------------------\n")
 
         # Connexion de l'utilisateur
-        if Choix == 1:
+        if ChoixLogin == 1:
             UserName = input("Veuillez saisir votre nom d'utilisateur : ")
             Password = getpass.getpass("Veuillez saisir votre mot de passe : ")
             Existe = Connexion(df, UserName, Password)
@@ -34,8 +35,9 @@ def main():
                 print("Utilisateur n'existe pas")
 
         # Inscription d'un nouvel utilisateur
-        elif Choix == 2:
+        elif ChoixLogin == 2:
             Existe = False 
+
             while not Existe:
                 UserName = input("Veuillez saisir votre nom d'utilisateur : ")
 
@@ -54,10 +56,10 @@ def main():
 
             if Existe:
                 print("Utilisateur créé avec succès.")
-                print("-------- Bienvenue sur votre espace --------")
+                print("\n-------- Bienvenue sur votre espace --------\n")
 
         # Quitter le programme
-        elif Choix == 3:
+        elif ChoixLogin == 3:
             print("-------- Au revoir --------")
             exit()
 
@@ -73,14 +75,51 @@ def main():
 ###############################################################################################################
 ############################################### DASHBOARD #####################################################
 ###############################################################################################################
+   
+    while True:
+        print("\n-------- Menu Principal --------\n")
+        print("1. Jouer QCM")
+        print("2. Consultation Des Scores")
+        print("3. Deconnexion")
+        print("\n--------------------------------")
 
 
+        try:
+
+            ChoixDashboard = int(input("Faites votre choix : "))
+            print("\n--------------------------------\n")
+        
+            if ChoixDashboard == 1 :
+                print("\n--------------------------------\n")
+                print("Types de QCM disponibles :")
+                print("1. Algorithmique")
+                print("2. Python")
+                print("3. Réseau")
+                print("4. Sécurité")
+                print("--------------------------------")
+                try:
+                    type_qcm = int(input("Choisissez le type de QCM (1-4) : "))
+                    JouerQCM(type_qcm, UserName)
+                except ValueError:
+                    print("Erreur : Vous devez entrer un nombre valide pour choisir le type de QCM.")
+
+            
+            elif ChoixDashboard == 2:
+                print("\n--------------------------------\n")
+                print("Prochainement Tu Pourras Consulter Ton Score")
+            
+            elif ChoixDashboard == 3:
+                print("-------- Au revoir --------")
+                break
+
+            else:
+                print("Choix invalide, veuillez entrer un nombre entre 1 et 3.")
 
 
-
-
-
-
+        except ValueError:
+            print("--------------------------------")
+            print("Erreur : Vous devez entrer un nombre pour faire un choix.")
+            print("--------------------------------")
 
 
 
@@ -92,3 +131,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

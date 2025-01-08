@@ -115,12 +115,4 @@ def JouerQCM(typeQCM, username):
         AfficherQCM(lecteur_csv, points_par_question, score, username, typeQCM)
 
 
-# Exemple d'utilisation :
-print("Types de QCM disponibles :")
-print("1. Algorithmique")
-print("2. Python")
-print("3. Réseau")
-print("4. Sécurité")
-type_qcm = int(input("Choisissez le type de QCM (1-4) : "))
-username = input("Entrez votre nom d'utilisateur : ")
-JouerQCM(type_qcm, username)
+
