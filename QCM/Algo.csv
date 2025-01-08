@@ -1,5 +1,5 @@
 question,option1,option2,option3,option4,correct_option
-"Qu'est-ce que la complexité temporelle d'un algorithme ?",Le temps d'exécution d'un programme,Le nombre d'opérations nécessaires pour un algorithme,La taille de l'algorithme en mémoire,Le nombre d'éléments dans une liste,2
+"Qu'est-ce que la complexité temporelle d'un algorithme ?",Le temps d'exécution d'un programme,Le nombre d'opérations nécessaires pour un algorithme,La taille de l'algorithme en mémoire,Le nombre d'éléments dans une liste,1
 "Quelle est la complexité temporelle de la recherche dichotomique ?",O(n),O(n log n),O(log n),O(1),3
 "Quelle est la définition d'une file FIFO ?",Une file où le premier élément ajouté est le premier à sortir,Une file où le dernier élément ajouté est le premier à sortir,Une structure hiérarchique,Une liste circulaire,1
 "Quelle est la définition d'une pile (LIFO) ?",Une structure où le dernier élément ajouté est le premier à sortir,Une structure où le premier élément ajouté est le premier à sortir,Une structure hiérarchique,Un tableau ordonné,1
