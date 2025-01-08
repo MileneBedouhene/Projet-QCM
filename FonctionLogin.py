@@ -43,10 +43,10 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
             'username': UserName,
             'password': password_hache,
             'score_total': 0,  
-            'historique_qcm_securite': "0,0",
-            'historique_qcm_python': "0,0",
-            'historique_qcm_algorithmique': "0,0",
-            'historique_qcm_reseau': "0,0"
+            'historique_qcm_Sécurité': 0,
+            'historique_qcm_Python': 0,
+            'historique_qcm_Algorithmique': 0,
+            'historique_qcm_Réseau': 0
         }
         
         # Convertir le dictionnaire en DataFrame
@@ -54,14 +54,14 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
 
         colonnes_attendues = [
             'username', 'password', 'score_total',
-            'historique_qcm_securite',  'historique_qcm_python', 
-            'historique_qcm_algorithmique', 'historique_qcm_reseau'
+            'historique_qcm_Sécurité',  'historique_qcm_Python', 
+            'historique_qcm_Algorithmique', 'historique_qcm_Réseau'
         ]
 
         colonnes_attendues = [
             'username', 'password', 'score_total',
-            'historique_qcm_securite', 'historique_qcm_python', 
-            'historique_qcm_algorithmique', 'historique_qcm_reseau'
+            'historique_qcm_Sécurité', 'historique_qcm_Python', 
+            'historique_qcm_Algorithmique', 'historique_qcm_Réseau'
         ]
 
         for colonne in colonnes_attendues:
