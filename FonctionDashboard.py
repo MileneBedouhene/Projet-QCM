@@ -116,3 +116,36 @@ def JouerQCM(typeQCM, username):
 
 
 
+        
+
+def AfficherScores(df, username):
+
+    try:
+        # Filtrer les données pour trouver l'utilisateur
+        utilisateur = df[df['username'] == username]
+        
+        if utilisateur.empty:
+            print("Utilisateur introuvable dans la base de données.")
+            return
+        
+        # Extraire les scores
+        score_total = int(utilisateur['score_total'].values[0])
+        score_securite = int(utilisateur['historique_qcm_Sécurité'].values[0])
+        score_python = int(utilisateur['historique_qcm_Python'].values[0])
+        score_reseau = int(utilisateur['historique_qcm_Réseau'].values[0])
+        score_algo = int(utilisateur['historique_qcm_Algorithmique'].values[0])
+        
+        # Affichage des scores
+        print("\n--- Consultation des Scores ---")
+        print(f"Score total : {score_total}")
+        print(f"Meilleur Score QCM Sécurité : {score_securite}")
+        print(f"Meilleur Score QCM Python : {score_python}")
+        print(f"Meilleur Score QCM Réseau : {score_reseau}")
+        print(f"Meilleur Score QCM Algorithmique : {score_algo}")
+        print("--------------------------------")
+    
+    except KeyError as e:
+        print(f"Erreur : La colonne {e} est manquante dans le fichier CSV.")
+    except Exception as e:
+        print(f"Erreur inattendue : {e}")
+    
