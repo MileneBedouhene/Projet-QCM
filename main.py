@@ -83,7 +83,6 @@ def main():
         print("3. Deconnexion")
         print("\n--------------------------------")
 
-
         try:
 
             ChoixDashboard = int(input("Faites votre choix : "))
@@ -106,7 +105,9 @@ def main():
             
             elif ChoixDashboard == 2:
                 print("\n--------------------------------\n")
-                print("Prochainement Tu Pourras Consulter Ton Score")
+                Chemin_Fichier = "./DataBase.csv"
+                df = Ouverture_Fichier(Chemin_Fichier)
+                AfficherScores(df, UserName)
             
             elif ChoixDashboard == 3:
                 print("-------- Au revoir --------")
