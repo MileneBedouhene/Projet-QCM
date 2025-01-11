@@ -3,79 +3,77 @@ from FonctionLogin import *
 from FonctionDashboard import *
 
 
-
 def main():
 
-###############################################################################################################
-############################################### AUTHENTIFICATION ##############################################
-###############################################################################################################
-    
+    ###############################################################################################################
+    ############################################### AUTHENTIFICATION ##############################################
+    ###############################################################################################################
+
     Chemin_Fichier = "./DataBase.csv"
     df = Ouverture_Fichier(Chemin_Fichier)
 
-    print("-------- Menu Principal --------\n")
-    print("1. Connexion")
-    print("2. Inscription")
-    print("3. Quitter")
-    print("\n--------------------------------\n")
-
     Existe = False
-    try:
-        ChoixLogin = int(input("Faites votre choix : "))
-        print("--------------------------------\n")
+    UserName = None  # Pour stocker le nom d'utilisateur authentifié
 
-        # Connexion de l'utilisateur
-        if ChoixLogin == 1:
-            UserName = input("Veuillez saisir votre nom d'utilisateur : ")
-            Password = getpass.getpass("Veuillez saisir votre mot de passe : ")
-            Existe = Connexion(df, UserName, Password)
-            if Existe:
-                print("\n-------- Bienvenue sur votre espace --------")
-            else:  # Affichage pour les deux cas pour des raisons de sécurité
-                print("Utilisateur n'existe pas")
+    while not Existe:  # Boucle tant qu'aucun utilisateur valide n'est connecté
+        print("-------- Menu Principal --------\n")
+        print("1. Connexion")
+        print("2. Inscription")
+        print("3. Quitter")
+        print("\n--------------------------------\n")
 
-        # Inscription d'un nouvel utilisateur
-        elif ChoixLogin == 2:
-            Existe = False 
+        try:
+            ChoixLogin = int(input("Faites votre choix : "))
+            print("--------------------------------\n")
 
-            while not Existe:
+            # Connexion de l'utilisateur
+            if ChoixLogin == 1:
                 UserName = input("Veuillez saisir votre nom d'utilisateur : ")
+                Password = getpass.getpass("Veuillez saisir votre mot de passe : ")
+                Existe = Connexion(df, UserName, Password)
+                if Existe:
+                    print("\n-------- Bienvenue sur votre espace --------")
+                else:  # Affichage pour les deux cas pour des raisons de sécurité
+                    print("Utilisateur n'existe pas")
 
-                while True:
-                    Password = getpass.getpass("Veuillez saisir votre mot de passe : ")
-                    ConfirmPassword = getpass.getpass("Veuillez confirmer votre mot de passe : ")
-                    if Password == ConfirmPassword:
-                        break 
-                    else:
-                        print("Les mots de passe ne correspondent pas. Veuillez réessayer.")
-                
-                # Création de l'utilisateur après vérification que les mots de passe soient corrects
-                Existe = CreationUtilisateur(df, UserName, Password, Chemin_Fichier)
-                if not Existe:
-                    print("Veuillez saisir un autre nom d'utilisateur")
+            # Inscription d'un nouvel utilisateur
+            elif ChoixLogin == 2:
+                while not Existe:
+                    UserName = input("Veuillez saisir votre nom d'utilisateur : ")
 
-            if Existe:
-                print("Utilisateur créé avec succès.")
-                print("\n-------- Bienvenue sur votre espace --------\n")
+                    while True:
+                        Password = getpass.getpass("Veuillez saisir votre mot de passe : ")
+                        ConfirmPassword = getpass.getpass("Veuillez confirmer votre mot de passe : ")
+                        if Password == ConfirmPassword:
+                            break
+                        else:
+                            print("Les mots de passe ne correspondent pas. Veuillez réessayer.")
 
-        # Quitter le programme
-        elif ChoixLogin == 3:
-            print("-------- Au revoir --------")
-            exit()
+                    # Création de l'utilisateur après vérification que les mots de passe soient corrects
+                    Existe = CreationUtilisateur(df, UserName, Password, Chemin_Fichier)
+                    if not Existe:
+                        print("Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
 
-        else:
-            print("Vous n'avez pas choisi une option valide.")
-            exit()
+                if Existe:
+                    print("Utilisateur créé avec succès.")
+                    print("\n-------- Bienvenue sur votre espace --------\n")
 
-    except ValueError:
-        print("--------------------------------")
-        print("Erreur : Vous devez entrer un nombre pour faire un choix.")
-        print("--------------------------------")
+            # Quitter le programme
+            elif ChoixLogin == 3:
+                print("-------- Au revoir --------")
+                exit()
 
-###############################################################################################################
-############################################### DASHBOARD #####################################################
-###############################################################################################################
-   
+            else:
+                print("Vous n'avez pas choisi une option valide.")
+
+        except ValueError:
+            print("Erreur : Vous devez entrer un nombre pour faire un choix.")
+
+
+    ###############################################################################################################
+    ############################################### DASHBOARD #####################################################
+    ###############################################################################################################
+
     while True:
         print("\n-------- Menu Principal --------\n")
         print("1. Jouer QCM")
@@ -84,11 +82,10 @@ def main():
         print("\n--------------------------------")
 
         try:
-
             ChoixDashboard = int(input("Faites votre choix : "))
             print("\n--------------------------------\n")
-        
-            if ChoixDashboard == 1 :
+
+            if ChoixDashboard == 1:
                 print("\n--------------------------------\n")
                 print("Types de QCM disponibles :")
                 print("1. Algorithmique")
@@ -102,13 +99,12 @@ def main():
                 except ValueError:
                     print("Erreur : Vous devez entrer un nombre valide pour choisir le type de QCM.")
 
-            
             elif ChoixDashboard == 2:
                 print("\n--------------------------------\n")
                 Chemin_Fichier = "./DataBase.csv"
                 df = Ouverture_Fichier(Chemin_Fichier)
                 AfficherScores(df, UserName)
-            
+
             elif ChoixDashboard == 3:
                 print("-------- Au revoir --------")
                 break
@@ -116,13 +112,8 @@ def main():
             else:
                 print("Choix invalide, veuillez entrer un nombre entre 1 et 3.")
 
-
         except ValueError:
-            print("--------------------------------")
             print("Erreur : Vous devez entrer un nombre pour faire un choix.")
-            print("--------------------------------")
-
-
 
 
 ###############################################################################################################
@@ -132,4 +123,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
