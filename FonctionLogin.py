@@ -1,25 +1,23 @@
 import pandas as pd
 import csv
 import hashlib
+import json
 from TraitementFichier import * 
 
-
-# Fonction de hachage
+# Fonction de hachage 
 def Hachage_Password(PassWord):
     sha256_hash = hashlib.sha256()
     sha256_hash.update(PassWord.encode('utf-8'))
     return sha256_hash.hexdigest()
 
-
-# Fonction de verification de l'existance d'un utilisateur
+# Fonction de verification de l'existance d'un utilisateur 
 def VerificationUtilisateur(df, UserName):
     if UserName in df['username'].values:
         return True  
     else:
         return False
 
-
-# Fonction de connexion
+# Fonction de connexion 
 def Connexion(df, UserName, Password):
     if VerificationUtilisateur(df, UserName):
         utilisateur = df[df['username'] == UserName].iloc[0]
@@ -31,9 +29,8 @@ def Connexion(df, UserName, Password):
             return False  # Mot de passe incorrect
     else:
         return False  # Utilisateur n'existe pas
-    
 
-# Fonction de creation
+# Fonction de creation 
 def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
     if VerificationUtilisateur(df, UserName):
         return False  # Utilisateur existe
@@ -42,21 +39,15 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
         nouvel_utilisateur = {
             'username': UserName,
             'password': password_hache,
-            'score_total': 0,  
-            'historique_qcm_Sécurité': 0,
-            'historique_qcm_Python': 0,
-            'historique_qcm_Algorithmique': 0,
-            'historique_qcm_Réseau': 0
+            'score_total': '0',  
+            'historique_qcm_Sécurité': '[]',    
+            'historique_qcm_Python': '[]',      
+            'historique_qcm_Algorithmique': '[]',
+            'historique_qcm_Réseau': '[]'       
         }
         
-        # Convertir le dictionnaire en DataFrame
-        nouvel_utilisateur_df = pd.DataFrame([nouvel_utilisateur])
 
-        colonnes_attendues = [
-            'username', 'password', 'score_total',
-            'historique_qcm_Sécurité',  'historique_qcm_Python', 
-            'historique_qcm_Algorithmique', 'historique_qcm_Réseau'
-        ]
+        nouvel_utilisateur_df = pd.DataFrame([nouvel_utilisateur])
 
         colonnes_attendues = [
             'username', 'password', 'score_total',
@@ -64,10 +55,16 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
             'historique_qcm_Algorithmique', 'historique_qcm_Réseau'
         ]
 
+        # S'assurer que toutes les colonnes existent
         for colonne in colonnes_attendues:
             if colonne not in df.columns:
-                df[colonne] = ""
-        
+                if colonne in ['historique_qcm_Sécurité', 'historique_qcm_Python', 
+                             'historique_qcm_Algorithmique', 'historique_qcm_Réseau']:
+                    df[colonne] = '[]' 
+                elif colonne == 'score_total':
+                    df[colonne] = '0'   
+                else:
+                    df[colonne] = ""    
 
         # Ajouter le nouvel utilisateur au DataFrame existant
         df = pd.concat([df, nouvel_utilisateur_df], ignore_index=True)
@@ -76,17 +73,3 @@ def CreationUtilisateur(df, UserName, Password, Chemin_Fichier):
         Sauvegarde_Fichier(df, Chemin_Fichier)
     
         return True
-    
-
-
-    
-
-
-
-
-
-
-
-
-
-
