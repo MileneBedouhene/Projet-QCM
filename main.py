@@ -13,17 +13,16 @@ def main():
     df = Ouverture_Fichier(Chemin_Fichier)
 
     Existe = False
-    UserName = None  # Pour stocker le nom d'utilisateur authentifié
 
     while not Existe:  # Boucle tant qu'aucun utilisateur valide n'est connecté
-        print("-------- Menu Principal --------\n")
+        print("\n-------- Menu Principal --------\n")
         print("1. Connexion")
         print("2. Inscription")
         print("3. Quitter")
-        print("\n--------------------------------\n")
+        print("\n--------------------------------")
 
         try:
-            ChoixLogin = int(input("Faites votre choix : "))
+            ChoixLogin = int(input("Faites votre choix entre (1-4): "))
             print("--------------------------------\n")
 
             # Connexion de l'utilisateur
@@ -34,7 +33,9 @@ def main():
                 if Existe:
                     print("\n-------- Bienvenue sur votre espace --------")
                 else:  # Affichage pour les deux cas pour des raisons de sécurité
-                    print("Utilisateur n'existe pas")
+                    print("\n--------------------------------")
+                    print("Erreur : Utilisateur n'existe pas")
+                    print("--------------------------------\n")
 
             # Inscription d'un nouvel utilisateur
             elif ChoixLogin == 2:
@@ -47,27 +48,39 @@ def main():
                         if Password == ConfirmPassword:
                             break
                         else:
-                            print("Les mots de passe ne correspondent pas. Veuillez réessayer.")
+                            print("\n------------------------------------------------------------------")
+                            print("Erreur : Les mots de passe ne correspondent pas. Veuillez réessayer.")
+                            print("--------------------------------------------------------------------\n")
 
                     # Création de l'utilisateur après vérification que les mots de passe soient corrects
                     Existe = CreationUtilisateur(df, UserName, Password, Chemin_Fichier)
                     if not Existe:
+                        print("\n---------------------------------------------------------------")
                         print("Ce nom d'utilisateur est déjà pris. Veuillez en choisir un autre.")
+                        print("------------------------------------------------------------------\n")
 
                 if Existe:
+                    print("\n--------------------------------")
                     print("Utilisateur créé avec succès.")
-                    print("\n-------- Bienvenue sur votre espace --------\n")
+                    print("--------------------------------\n")
+                    print("\n------- Bienvenue dans votre espace -------\n")
 
             # Quitter le programme
             elif ChoixLogin == 3:
+                print("\n--------------------------------")
                 print("-------- Au revoir --------")
+                print("--------------------------------\n")
                 exit()
 
             else:
-                print("Vous n'avez pas choisi une option valide.")
+                print("\n--------------------------------")
+                print("Erreur : Vous n'avez pas choisi une option valide.")
+                print("--------------------------------\n")
 
         except ValueError:
+            print("\n--------------------------------")
             print("Erreur : Vous devez entrer un nombre pour faire un choix.")
+            print("--------------------------------\n")
 
 
     ###############################################################################################################
@@ -75,45 +88,51 @@ def main():
     ###############################################################################################################
 
     while True:
-        print("\n-------- Menu Principal --------\n")
+        
+        print("\n-------------- Menu Principal ------------\n")
         print("1. Jouer QCM")
         print("2. Consultation Des Scores")
         print("3. Deconnexion")
         print("\n--------------------------------")
 
         try:
-            ChoixDashboard = int(input("Faites votre choix : "))
-            print("\n--------------------------------\n")
+            ChoixDashboard = int(input("Faites votre choix entre (1-4) : "))
+            print("--------------------------------\n")
 
             if ChoixDashboard == 1:
-                print("\n--------------------------------\n")
                 print("Types de QCM disponibles :")
                 print("1. Algorithmique")
                 print("2. Python")
                 print("3. Réseau")
                 print("4. Sécurité")
-                print("--------------------------------")
+                print("\n--------------------------------")
                 try:
                     type_qcm = int(input("Choisissez le type de QCM (1-4) : "))
+                    print("--------------------------------------\n")
                     JouerQCM(type_qcm, UserName)
                 except ValueError:
                     print("Erreur : Vous devez entrer un nombre valide pour choisir le type de QCM.")
 
             elif ChoixDashboard == 2:
-                print("\n--------------------------------\n")
                 Chemin_Fichier = "./DataBase.csv"
                 df = Ouverture_Fichier(Chemin_Fichier)
+                print("\n--- Consultation des Scores ---")
                 AfficherScores(df, UserName)
+                print("--------------------------------\n")
 
             elif ChoixDashboard == 3:
                 print("-------- Au revoir --------")
                 break
 
             else:
+                print("\n--------------------------------")
                 print("Choix invalide, veuillez entrer un nombre entre 1 et 3.")
+                print("--------------------------------\n")
 
         except ValueError:
+            print("\n--------------------------------")
             print("Erreur : Vous devez entrer un nombre pour faire un choix.")
+            print("--------------------------------\n")
 
 
 ###############################################################################################################

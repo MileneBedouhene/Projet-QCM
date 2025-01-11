@@ -4,7 +4,7 @@ from TraitementFichier import *
 
 def MettreAJourScore(username, nouveau_score, typeQCM):
     # Chemin du fichier des utilisateurs
-    fichier_utilisateurs = r"C:\\Users\\milen\\OneDrive\\Desktop\\Projet-QCM\\DataBase.csv"
+    fichier_utilisateurs = "./DataBase.csv"
     utilisateurs = []
     type_qcm = {
         1:"historique_qcm_Algorithmique",
@@ -52,9 +52,13 @@ def MettreAJourScore(username, nouveau_score, typeQCM):
             writer = csv.DictWriter(fichier, fieldnames=champs)
             writer.writeheader()
             writer.writerows(utilisateurs)
+            print("\n--------------------------------")
             print("Les scores ont été mis à jour avec succès !")
+            print("--------------------------------\n")
     else:
-        print("Utilisateur non trouvé.")
+        print("\n--------------------------------")
+        print("Erreur : Utilisateur non trouvé.")
+        print("--------------------------------\n")
 
 
 def AfficherQCM(lecteur_csv, points_par_question, score, username, typeQCM):
@@ -69,38 +73,47 @@ def AfficherQCM(lecteur_csv, points_par_question, score, username, typeQCM):
         # Demander une réponse à l'utilisateur
         while True:
             try:
+                print("\n-----------------------------------")
                 reponse = int(input("Votre réponse (1-4) : "))
+                print("-----------------------------------\n")
                 if 1 <= reponse <= 4:
                     break
                 else:
+                    print("\n-------------------------------------")
                     print("Veuillez entrer un nombre entre 1 et 4.")
+                    print("-------------------------------------\n")
             except ValueError:
+                print("\n--------------------------------")
                 print("Veuillez entrer un nombre valide.")
+                print("--------------------------------\n")
 
         # Vérifier si la réponse est correcte
         if reponse == int(question['correct_option']):
-            print("✅ Bonne réponse !\n")
+            print("\n-----------------")
+            print("✅ Bonne réponse !")
+            print("-----------------\n")
             score += points_par_question
         else:
-            print(f"❌ Mauvaise réponse. La bonne réponse était la réponse {question['correct_option']}.\n")
+            print("\n---------------------------------------------------------------------------------------")
+            print(f"❌ Mauvaise réponse. La bonne réponse était la réponse {question['correct_option']}.")
+            print("---------------------------------------------------------------------------------------\n")
 
     # Afficher le score final
+    print("\n----------------------------")
     print(f"Votre score final : {score}")
+    print("----------------------------\n")
 
     # Mettre à jour le score dans le fichier utilisateur
     MettreAJourScore(username, score, typeQCM)
 
 
-
-
-
 def JouerQCM(typeQCM, username):
     # Associer chaque type de QCM à son fichier CSV
     fichiers_qcm = {
-        1: r"C:\Users\milen\OneDrive\Desktop\Projet-QCM\QCM\Algo.csv",
-        2: r"C:\Users\milen\OneDrive\Desktop\Projet-QCM\QCM\Python.csv",
-        3: r"C:\Users\milen\OneDrive\Desktop\Projet-QCM\QCM\Reseau.csv",
-        4: r"C:\Users\milen\OneDrive\Desktop\Projet-QCM\QCM\Securite.csv"
+        1: './QCM/Algo.csv',
+        2: './QCM/Python.csv',
+        3: './QCM/Reseau.csv',
+        4: './QCM/Securite.csv'
     }
 
     fichier_csv = fichiers_qcm[typeQCM]  # Sélection du fichier correspondant
@@ -110,11 +123,7 @@ def JouerQCM(typeQCM, username):
     # Lecture du fichier CSV
     with open(fichier_csv, mode='r', encoding='utf-8') as fichier:
         lecteur_csv = csv.DictReader(fichier)
-
-        print(f"\n--- QCM Type {typeQCM} ---\n")
         AfficherQCM(lecteur_csv, points_par_question, score, username, typeQCM)
-
-
 
         
 
@@ -125,7 +134,9 @@ def AfficherScores(df, username):
         utilisateur = df[df['username'] == username]
         
         if utilisateur.empty:
+            print("\n----------------------------------------------")
             print("Utilisateur introuvable dans la base de données.")
+            print("----------------------------------------------\n")
             return
         
         # Extraire les scores
@@ -136,16 +147,18 @@ def AfficherScores(df, username):
         score_algo = int(utilisateur['historique_qcm_Algorithmique'].values[0])
         
         # Affichage des scores
-        print("\n--- Consultation des Scores ---")
         print(f"Score total : {score_total}")
         print(f"Meilleur Score QCM Sécurité : {score_securite}")
         print(f"Meilleur Score QCM Python : {score_python}")
         print(f"Meilleur Score QCM Réseau : {score_reseau}")
         print(f"Meilleur Score QCM Algorithmique : {score_algo}")
-        print("--------------------------------")
     
     except KeyError as e:
+        print("\n---------------------------------------------------------")
         print(f"Erreur : La colonne {e} est manquante dans le fichier CSV.")
+        print("---------------------------------------------------------\n")
     except Exception as e:
+        print("\n-----------------------")
         print(f"Erreur inattendue : {e}")
+        print("-----------------------\n")
     
