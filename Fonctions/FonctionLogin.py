@@ -2,7 +2,7 @@ import pandas as pd
 import csv
 import hashlib
 import json
-from TraitementFichier import * 
+from Fonctions.TraitementFichier import * 
 
 # Fonction de hachage 
 def Hachage_Password(PassWord):

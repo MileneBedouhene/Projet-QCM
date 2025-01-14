@@ -1,6 +1,6 @@
 import getpass
-from FonctionLogin import *
-from FonctionDashboard import *
+from Fonctions.FonctionLogin import *
+from Fonctions.FonctionDashboard import *
 
 
 def main():
@@ -9,7 +9,7 @@ def main():
     ############################################### AUTHENTIFICATION ##############################################
     ###############################################################################################################
 
-    Chemin_Fichier = "./DataBase.csv"
+    Chemin_Fichier = "./DataBase/DataBase.csv"
     df = Ouverture_Fichier(Chemin_Fichier)
 
     Existe = False
@@ -19,10 +19,10 @@ def main():
         print("1. Connexion")
         print("2. Inscription")
         print("3. Quitter")
-        print("\n--------------------------------")
+        print("\n"+"-" *120)
 
         try:
-            ChoixLogin = int(input("Faites votre choix entre (1-4): "))
+            ChoixLogin = int(input("Faites votre choix entre (1-3): "))
             print("--------------------------------\n")
 
             # Connexion de l'utilisateur
@@ -96,7 +96,7 @@ def main():
         print("\n--------------------------------")
 
         try:
-            ChoixDashboard = int(input("Faites votre choix entre (1-4) : "))
+            ChoixDashboard = int(input("Faites votre choix entre (1-3) : "))
             print("--------------------------------\n")
 
             if ChoixDashboard == 1:
@@ -114,7 +114,7 @@ def main():
                     print("Erreur : Vous devez entrer un nombre valide pour choisir le type de QCM.")
 
             elif ChoixDashboard == 2:
-                Chemin_Fichier = "./DataBase.csv"
+                Chemin_Fichier = "./DataBase/DataBase.csv"
                 df = Ouverture_Fichier(Chemin_Fichier)
                 print("\n--- Consultation des Scores ---")
                 AfficherScores(df, UserName)
