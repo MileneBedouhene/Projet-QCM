@@ -57,9 +57,6 @@ def MettreAJourScore(username, nouveau_score, typeQCM):
             writer = csv.DictWriter(fichier, fieldnames=champs)
             writer.writeheader()
             writer.writerows(utilisateurs)
-            print("\n"+"-" *120)
-            print("Les scores ont été mis à jour avec succès !")
-            print("-" *120 + "\n")
     else:
         print("\n"+"-" *120)
         print("Erreur : Utilisateur non trouvé.")
@@ -79,7 +76,7 @@ def AfficherQCM(lecteur_csv, points_par_question, score, username, typeQCM):
         while True:
             try:
                 print("\n"+"-" *120)
-                reponse = int(input("Votre réponse (1-4) : "))
+                reponse = int(input("Choisissez une réponse (1-4) : "))
                 print("-" *120 + "\n")
                 if 1 <= reponse <= 4:
                     break
@@ -152,7 +149,7 @@ def AfficherScores(df, username):
         }
         
         score_total = int(utilisateur['score_total'].values[0])
-        print(f"Score total : {score_total}\n")
+        print(f"Meilleur score : {score_total}/2000\n")
         
         for col, nom in types_qcm.items():
             historique = json.loads(utilisateur[col].values[0]) if utilisateur[col].values[0] else []
@@ -163,7 +160,7 @@ def AfficherScores(df, username):
                 for tentative in sorted(historique, key=lambda x: x['date'], reverse=True):
                     print(f"{tentative['date']}  {tentative['score']}")
                 meilleur_score = max(tentative['score'] for tentative in historique)
-                print(f"\nMeilleur score: {meilleur_score}/2000")
+                print(f"\nMeilleur score: {meilleur_score}/500")
             else:
                 print("Aucune tentative enregistrée")
             print()
