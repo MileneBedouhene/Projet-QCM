@@ -69,7 +69,7 @@ def main():
             # Quitter le programme
             elif ChoixLogin == 3:
                 print("\n"+"-" *120)
-                print("-------- Au revoir --------")
+                print("------------------------------------------------------ Au revoir -------------------------------------------------------")
                 print("-" *120 + "\n")
                 exit()
 
